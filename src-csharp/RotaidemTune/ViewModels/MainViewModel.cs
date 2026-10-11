@@ -59,7 +59,9 @@ public class MainViewModel : INotifyPropertyChanged
             airflowTarget = Math.Min(1.0, Math.Pow((IndicatedAirspeed - 40) / 210.0, 0.7));
             airflowTarget *= AirflowVolume * MasterVolume;
         }
+
         double cabinTarget = CabinEnabled ? CabinVolume * MasterVolume * 0.6 : 0;
+
         _audio.SetAirflowGain(airflowTarget);
         _audio.SetCabinGain(cabinTarget);
     }
@@ -75,5 +77,9 @@ public class RelayCommand : ICommand
     public RelayCommand(Action execute) => _execute = execute;
     public bool CanExecute(object? parameter) => true;
     public void Execute(object? parameter) => _execute();
-    public event EventHandler? CanExecuteChanged;
+    public event EventHandler? CanExecuteChanged
+    {
+        add { }
+        remove { }
+    }
 }
