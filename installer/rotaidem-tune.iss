@@ -1,19 +1,4 @@
 ; Rotaidem Tune - Inno Setup Script
-; Builds a Windows installer for the external companion application.
-; 
-; Build instructions (on a Windows machine with Inno Setup installed):
-; 1. Package the Node.js app into a single .exe using pkg or electron-builder (see installer/BUILD.md).
-; 2. Place the resulting RotaidemTune.exe in the same folder as this .iss file.
-; 3. Compile this script with Inno Setup to produce RotaidemTune-Setup.exe.
-;
-; Installation locations:
-; - Application: %LOCALAPPDATA%\Rotaidem\Tune\
-; - Optional Community folder detection and companion package placement.
-;
-; Note: Per product rules, the installer does not modify official simulator files
-; or overwrite aircraft packages. The optional Community placement only adds a
-; small companion folder with documentation and a launcher shortcut.
-
 #define MyAppName "Rotaidem Tune"
 #define MyAppVersion "0.1.0-beta"
 #define MyAppPublisher "Rotaidem Software Group"
@@ -47,6 +32,7 @@ Name: "community"; Description: "Also place a companion package in the MSFS 2024
 
 [Files]
 Source: "RotaidemTune.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "assets\audio\*"; DestDir: "{app}\assets\audio"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "community-package\*"; DestDir: "{code:GetCommunityPath}\rotaidem-tune"; Flags: ignoreversion recursesubdirs createallsubdirs; Tasks: community; Check: CommunityDetected
 
 [Icons]
