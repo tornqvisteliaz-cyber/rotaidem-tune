@@ -1,0 +1,51 @@
+<Window x:Class="RotaidemTune.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rotaidem Tune" Height="520" Width="480"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Rotaidem Tune" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}"/>
+            <TextBlock Text="External audio for MSFS 2024" FontSize="12" Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Background="{StaticResource PanelBrush}" Padding="12" Margin="0,0,0,16" CornerRadius="2">
+            <StackPanel>
+                <TextBlock Text="Connection" FontSize="11" Foreground="{StaticResource MutedBrush}"/>
+                <TextBlock Text="{Binding ConnectionState}" FontSize="16" FontWeight="Medium" Foreground="{StaticResource AccentBrush}" Margin="0,2,0,8"/>
+                <TextBlock Text="Flight State" FontSize="11" Foreground="{StaticResource MutedBrush}"/>
+                <TextBlock Text="{Binding FlightState}" FontSize="14" Foreground="{StaticResource TextBrush}" Margin="0,2,0,8"/>
+                <TextBlock Text="Indicated Airspeed" FontSize="11" Foreground="{StaticResource MutedBrush}"/>
+                <TextBlock Text="{Binding IndicatedAirspeed, StringFormat={}{0:F0} kts}" FontSize="14" Foreground="{StaticResource TextBrush}"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Master Volume" Foreground="{StaticResource TextBrush}" Margin="0,0,0,4"/>
+            <Slider Minimum="0" Maximum="1" Value="{Binding MasterVolume}" Margin="0,0,0,12"/>
+
+            <CheckBox Content="Airflow Layer" IsChecked="{Binding AirflowEnabled}" Foreground="{StaticResource TextBrush}" Margin="0,0,0,4"/>
+            <Slider Minimum="0" Maximum="1" Value="{Binding AirflowVolume}" IsEnabled="{Binding AirflowEnabled}" Margin="0,0,0,12"/>
+
+            <CheckBox Content="Cabin Ambience" IsChecked="{Binding CabinEnabled}" Foreground="{StaticResource TextBrush}" Margin="0,0,0,4"/>
+            <Slider Minimum="0" Maximum="1" Value="{Binding CabinVolume}" IsEnabled="{Binding CabinEnabled}" Margin="0,0,0,12"/>
+
+            <Button Content="Preview Airflow" Command="{Binding PreviewCommand}" 
+                    Background="{StaticResource AccentBrush}" Foreground="White" 
+                    Padding="12,6" BorderThickness="0" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="3" Text="Rotaidem Software Group  ·  v0.1.0-beta" 
+                   FontSize="11" Foreground="{StaticResource MutedBrush}" 
+                   HorizontalAlignment="Center" Margin="0,12,0,0"/>
+    </Grid>
+</Window>
